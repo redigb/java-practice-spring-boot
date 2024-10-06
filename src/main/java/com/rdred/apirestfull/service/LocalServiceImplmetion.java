@@ -1,6 +1,7 @@
 package com.rdred.apirestfull.service;
 
 import com.rdred.apirestfull.entity.Local;
+import com.rdred.apirestfull.error.LocalNotFoundException;
 import com.rdred.apirestfull.repository.LocalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,14 @@ public class LocalServiceImplmetion implements LocalService{
     @Autowired
     LocalRepository localRepository;
 
+
+    @Override
+    public Local findLocalByid(Long id) throws LocalNotFoundException {
+        Optional<Local> local = localRepository.findById(id);
+        if (!local.isPresent())
+            throw new LocalNotFoundException("Local no esta disponible");
+        return local.get();
+    }
 
     @Override
     public List<Local> findAllLocals() {
@@ -49,5 +58,15 @@ public class LocalServiceImplmetion implements LocalService{
     @Override
     public Optional<Local> findLocalNameWithJpql(String name) {
         return localRepository.findLocalNameWithJpql(name);
+    }
+
+    @Override
+    public Optional<Local> findByName(String name) {
+        return localRepository.findByName(name);
+    }
+
+    @Override
+    public Optional<Local> findByNameIgnoreCase(String name) {
+        return localRepository.findByNameIgnoreCase(name);
     }
 }

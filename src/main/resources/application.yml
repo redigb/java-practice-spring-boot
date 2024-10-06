@@ -1,0 +1,67 @@
+server:
+  port: 3005
+
+spring:
+  profiles:
+    active: produ
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  application:
+    name: apirestfull
+  datasource:
+    password: admin77
+    url: jdbc:postgresql://localhost:5450/restfulapi
+    username: renzo_rd
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      platform: postgres
+---
+spring:
+  config:
+    activate:
+      on-profile: qa
+  application:
+    name: apirestfull
+  datasource:
+    password: admin77
+    url: jdbc:postgresql://localhost:5450/restfulapiq
+    username: renzo_rd
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      platform: postgres
+
+---
+spring:
+  config:
+    activate:
+      on-profile: produ
+  application:
+    name: apirestfull
+  datasource:
+    password: admin77
+    url: jdbc:postgresql://localhost:5450/restfulapi_prod
+    username: renzo_rd
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sql:
+    init:
+      platform: postgres

@@ -9,11 +9,12 @@ import java.util.Optional;
 // Capa de acceso a datos
 public interface LocalRepository extends JpaRepository<Local, Long>{
 
-    // Consultas Gustomizadas o personalizadas
-    //@Query("SELECT l FROM locals l WHERE l.local = :name")
-    //Optional<Local> findLocalNameWithJpql(String name);
-
-    // Consultas personalizadas
+    // Consultas personalizadas(SOLO SQL)
     @Query("SELECT l FROM Local l WHERE l.name = :name")
     Optional<Local> findLocalNameWithJpql(String name);
+
+    // Modo consulta jpa - spring-(Inversion de control)
+    Optional<Local> findByName(String name);
+    // Ignora las excepciones de los valores
+    Optional<Local> findByNameIgnoreCase(String name);
 }
